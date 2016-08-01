@@ -36,16 +36,27 @@
             Duración total: {{curso.duration}}</p>
           </md-card-content>
           <div class="md-actions" layout="row" layout-align="end center">
-            <div class="btn-group" uib-dropdown>
-      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-       Ver videos <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <div ng-repeat="chapter in curso.chapters">
-        <li role="menuitem" ng-repeat="lesson in chapter.lessons"><a href="{{lesson.videos[0].url}}">{{lesson.order}} - {{lesson.title}}</a></li></div>
-      </ul>
-    </div>
+            
+
+<div class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary">
+                Ver videos <span class="caret"></span>
+            </a>
+        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu" >
+              <li class="dropdown-submenu" ng-repeat="chapter in curso.chapters">
+                <a tabindex="-1" href="#">{{chapter.title}}</a>
+                <ul class="dropdown-menu">
+                <li  ng-repeat="lesson in chapter.lessons"><a tabindex="-1" href="{{lesson.videos[0].url}}">{{lesson.order}} - {{lesson.title}}</a></li>
+                 </ul>
+              </li>
+            </ul>
+        </div>
+
+
           </div>
+
+
+
         </md-card>
     </div>
     </div>
