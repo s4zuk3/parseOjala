@@ -1,53 +1,71 @@
-<!doctype html>
-<html ng-app="ojalaApp">
-<head>
-  <meta charset="utf-8">
-  <title>Ojala Videos</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Ojala Videos</title>
+    
+    <link rel='stylesheet prefetch' href='https://gitcdn.xyz/repo/angular/bower-material/v0.10.1-rc4/angular-material.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
 
+    
+    
+    
+  </head>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  <script src="app.js"></script>
-</head>
   <body>
-    <h2>Videos Curso Ojala</h2>
-    <div ng-controller="AppCtrl" class="gridListdemoBasicUsage" ng-cloak>
-   <div class='md-padding' layout="row" layout-wrap>
-      <md-card style="width: 300px;" ng-repeat="curso in cursos">
-        <img ng-src="http://placehold.it/150x150" class="md-card-image" alt="imagen curso">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{curso.category}}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-            Descripción: {{curso.title}}<br>
+
+    <div ng-app="MyApp" class="gridListdemoBasicUsage" ng-controller="AppCtrl as appCtrl">
+
+  <h1>Cursos de Ojala</h1> 
+<div style="padding:20px 0px 60px 0px">
+      <span class="col-md-1" style="font-weight:bold">Search</span>
+      <span class="col-md-3">
+      <input type="text" class="form-control" ng-model="searchKeyword"/>
+      </span>
+    </div>
+
+  <div class='md-padding' layout="row" layout-wrap>
+        <md-card style="width: 300px;" ng-repeat="curso in cursos | filter: searchKeyword">
+          <img src="http://oja.la{{curso.img}}" width="150" class="md-card-image" alt="user avatar">
+          <md-card-content>
+            <h2>{{curso.category}}</h2>
+            <p>Descripción: {{curso.title}}<br>
             Level: {{curso.level }}<br>
             Lecciones: {{curso.lessons}}<br>
-            Duración total: {{curso.duration}}
-          </p>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-icon-button" aria-label="Favorite">
-            <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="Settings">
-            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="Share">
-            <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
-          </md-button>
-        </md-card-actions>
-      </md-card>
-      
-   </div>
+            Duración total: {{curso.duration}}</p>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center">
+            <div class="btn-group" uib-dropdown>
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+       Ver videos <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <div ng-repeat="chapter in curso.chapters">
+        <li role="menuitem" ng-repeat="lesson in chapter.lessons"><a href="{{lesson.videos[0].url}}">{{lesson.order}} - {{lesson.title}}</a></li></div>
+      </ul>
+    </div>
+          </div>
+        </md-card>
+    </div>
+    </div>
+  </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.min.js'></script>
+<script src='https://gitcdn.xyz/repo/angular/bower-material/v0.10.1-rc4/angular-material.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+
+        <script src="js/index.js"></script>
+<script src="js/ui-bootstrap-tpls-2.0.0.min.js"></script>
+    
+    
+    
   </body>
 </html>
